@@ -44,7 +44,7 @@ export function Demo1Simple() {
                                 duration: 2,
                             }}
                         >
-                            <div className="my-4 size-12 bg-red-500 rounded-md">
+                            <div className="my-4 size-12 bg-red-500 rounded-md border-input border-4">
                             </div>
                         </motion.div>
                     )}
