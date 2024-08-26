@@ -1,20 +1,23 @@
 import { isDarkTheme, themeApplyMode } from "@/utils";
 import { Button } from "../ui/button";
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store";
 
 export function Footer() {
+    const isDark = useSnapshot(appSettings).theme === "dark";
     return (
-        <footer className="p-4 bg-sky-600 flex items-center justify-between">
+        <footer className="p-4 bg-muted border-foreground/10 border-t flex items-center justify-between">
             <h1 className="">Footer</h1>
 
             <Button
-                className="text-foreground"
+                className="1text-foreground"
                 size={"sm"}
                 variant={"outline"}
-                onClick={() => themeApplyMode(isDarkTheme() ? "light" : "dark")}
+                onClick={() => appSettings.theme = isDark ? "light" : "dark"}
             >
-                Now {isDarkTheme() ? "Dark" : "Light"} Mode
+                Now {isDark ? "Dark" : "Light"} Mode
             </Button>
-            
+
         </footer>
     );
 }

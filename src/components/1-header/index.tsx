@@ -2,17 +2,18 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 
 export function Header() {
     return (
-        <header className="p-4 bg-sky-600 flex items-center justify-between">
-            <h1 className="">Header</h1>
+        <header className="p-4 bg-muted border-foreground/10 border-b flex items-center justify-between">
+            <h1 className="">Framer Motion Demos</h1>
 
             <Select>
                 <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select a fruit" />
+                    <SelectValue placeholder="Select demo" />
                 </SelectTrigger>
-                
+
                 <SelectContent>
                     <SelectGroup>
-                        <SelectItem value="apple">Apple</SelectItem>
+                        <SelectItem value="demo1">Simple</SelectItem>
+                        <SelectItem value="demo2">Accordion</SelectItem>
                     </SelectGroup>
                 </SelectContent>
             </Select>
