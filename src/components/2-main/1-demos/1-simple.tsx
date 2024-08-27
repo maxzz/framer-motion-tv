@@ -15,16 +15,15 @@ export function Demo1Simple() {
     function fn() {
         const date = new Date();
 
-        const msg = new Intl.DateTimeFormat('en-GB', {
-            //dateStyle: 'full',
-            timeStyle: 'long',
-            //timeZone: 'Australia/Sydney',
-          }).format(date)
+        const msg = date.toLocaleTimeString('en-US', {
+        });
 
         setState(`called at ${msg}`);
     }
 
-    const [isReady, cancel, reset] = useTimeoutFn(fn, 500);
+    const timeout = 1000;
+
+    const [isReady, cancel, reset] = useTimeoutFn(fn, timeout);
     const cancelButtonClick = useCallback(() => {
         if (isReady() === false) {
             cancel();
@@ -60,9 +59,9 @@ export function Demo1Simple() {
                 </div>
             </div>
 
-            <div className="py-4 text-xs inline-grid grid-rows-[auto_auto_auto_1fr] items-center gap-1">
+            <div className="py-4 w-2/3 max-w-64 text-xs inline-grid grid-rows-[auto_auto_auto_1fr] items-center gap-1">
                 <div>
-                    Promise: {readyState !== null ? 'Function will be called in 0.5 second' : 'Timer cancelled'}
+                    Promise: {readyState !== null ? `Function will be called in ${timeout/1000} second(s)` : 'Timer cancelled'}
                 </div>
 
                 <div>
