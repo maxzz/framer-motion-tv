@@ -13,7 +13,15 @@ export function Demo1Simple() {
     const [state, setState] = useState('Not called yet');
 
     function fn() {
-        setState(`called at ${Date.now()}`);
+        const date = new Date();
+        
+        const msg = new Intl.DateTimeFormat('en-GB', {
+            dateStyle: 'full',
+            timeStyle: 'long',
+            timeZone: 'Australia/Sydney',
+          }).format(date)
+
+        setState(`called at ${msg}`);
     }
 
     const [isReady, cancel, reset] = useTimeoutFn(fn, 500);
@@ -52,7 +60,7 @@ export function Demo1Simple() {
                 </div>
             </div>
 
-            <div className="text-xs inline-grid grid-rows-4 gap-1">
+            <div className="text-xs inline-grid grid-rows-4 items-center">
                 <div>
                     {readyState !== null ? 'Function will be called in 5 seconds' : 'Timer cancelled'}
                 </div>
