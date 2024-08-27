@@ -14,11 +14,11 @@ export function Demo1Simple() {
 
     function fn() {
         const date = new Date();
-        
+
         const msg = new Intl.DateTimeFormat('en-GB', {
-            dateStyle: 'full',
+            //dateStyle: 'full',
             timeStyle: 'long',
-            timeZone: 'Australia/Sydney',
+            //timeZone: 'Australia/Sydney',
           }).format(date)
 
         setState(`called at ${msg}`);
@@ -62,13 +62,8 @@ export function Demo1Simple() {
 
             <div className="text-xs inline-grid grid-rows-4 items-center">
                 <div>
-                    {readyState !== null ? 'Function will be called in 5 seconds' : 'Timer cancelled'}
+                    Promise: {readyState !== null ? 'Function will be called in 0.5 second' : 'Timer cancelled'}
                 </div>
-
-                <Button onClick={cancelButtonClick}>
-                    {readyState === false ? 'Cancel' : 'Restart'}{' '}
-                    timeout
-                </Button>
 
                 <div>
                     Function state: {readyState === false ? 'Pending' : readyState ? 'Called' : 'Cancelled'}
@@ -77,6 +72,11 @@ export function Demo1Simple() {
                 <div>
                     State: {state}
                 </div>
+
+                <Button onClick={cancelButtonClick}>
+                    {readyState === false ? 'Cancel' : 'Restart'}{' '}
+                    timeout
+                </Button>
             </div>
 
             <div className="grid place-items-center">
