@@ -1,10 +1,36 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTimeoutFn } from "react-use";
 
 export function Demo1Simple() {
     const [show, setShow] = useState(false);
     const [idDone, setIdDone] = useState(false);
-    //TODO: useTimeout to reset idDone
+
+
+
+
+    const [state, setState] = useState('Not called yet');
+
+    function fn() {
+        setState(`called at ${Date.now()}`);
+    }
+
+    const [isReady, cancel, reset] = useTimeoutFn(fn, 5000);
+    const cancelButtonClick = useCallback(() => {
+        if (isReady() === false) {
+            cancel();
+            setState(`cancelled`);
+        } else {
+            //reset();
+            setState('Not called yet');
+        }
+    }, []);
+
+    const readyState = isReady();
+
+
+
+
     return (
         <div className="my-4 text-sm">
 
@@ -19,8 +45,25 @@ export function Demo1Simple() {
                 >
                     {show ? "Hide" : "Show"}
                 </button>
+
                 <div className="text-xs">
                     {idDone ? 'exit animation done' : 'element visible'}
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    {readyState !== null ? 'Function will be called in 5 seconds' : 'Timer cancelled'}
+                </div>
+                <button onClick={cancelButtonClick}> {readyState === false ? 'cancel' : 'restart'}
+                    timeout
+                </button>
+                <br />
+                <div>
+                    Function state: {readyState === false ? 'Pending' : readyState ? 'Called' : 'Cancelled'}
+                </div>
+                <div>
+                    {state}
                 </div>
             </div>
 
