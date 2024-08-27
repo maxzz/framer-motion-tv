@@ -60,7 +60,7 @@ export function Demo1Simple() {
                 </div>
             </div>
 
-            <div className="text-xs inline-grid grid-rows-4 items-center">
+            <div className="py-4 text-xs inline-grid grid-rows-[auto_auto_auto_1fr] items-center gap-1">
                 <div>
                     Promise: {readyState !== null ? 'Function will be called in 0.5 second' : 'Timer cancelled'}
                 </div>
