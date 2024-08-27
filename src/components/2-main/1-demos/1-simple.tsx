@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTimeoutFn } from "react-use";
+import { Button } from "@/components/ui/button";
 
 export function Demo1Simple() {
     const [show, setShow] = useState(false);
@@ -15,13 +16,13 @@ export function Demo1Simple() {
         setState(`called at ${Date.now()}`);
     }
 
-    const [isReady, cancel, reset] = useTimeoutFn(fn, 5000);
+    const [isReady, cancel, reset] = useTimeoutFn(fn, 500);
     const cancelButtonClick = useCallback(() => {
         if (isReady() === false) {
             cancel();
             setState(`cancelled`);
         } else {
-            //reset();
+            reset();
             setState('Not called yet');
         }
     }, []);
@@ -51,19 +52,22 @@ export function Demo1Simple() {
                 </div>
             </div>
 
-            <div>
+            <div className="text-xs inline-grid grid-rows-4 gap-1">
                 <div>
                     {readyState !== null ? 'Function will be called in 5 seconds' : 'Timer cancelled'}
                 </div>
-                <button onClick={cancelButtonClick}> {readyState === false ? 'cancel' : 'restart'}
+
+                <Button onClick={cancelButtonClick}>
+                    {readyState === false ? 'Cancel' : 'Restart'}{' '}
                     timeout
-                </button>
-                <br />
+                </Button>
+
                 <div>
                     Function state: {readyState === false ? 'Pending' : readyState ? 'Called' : 'Cancelled'}
                 </div>
+
                 <div>
-                    {state}
+                    State: {state}
                 </div>
             </div>
 
