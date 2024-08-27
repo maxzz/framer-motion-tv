@@ -2,6 +2,7 @@
     "name": "framer-motion-tv",
     "private": true,
     "version": "0.0.1",
+    "description": "A Framer Motion recepies",
     "type": "module",
     "dependencies": {
         "@radix-ui/react-icons": "^1.3.0",

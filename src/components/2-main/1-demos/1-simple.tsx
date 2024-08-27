@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export function Demo1Simple() {
     const [show, setShow] = useState(false);
     const [idDone, setIdDone] = useState(false);
+    //TODO: useTimeout to reset idDone
     return (
         <div className="my-4 text-sm">
 
