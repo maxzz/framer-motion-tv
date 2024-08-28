@@ -35,5 +35,5 @@ export function useTimeoutImperative(callback: () => void) {
         }, []
     );
 
-    return { set, clear };
+    return [set, clear] as const;
 }

@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTimeoutFn } from "react-use";
 import { Button } from "@/components/ui/button";
+import { useTimeoutImperative } from "@/components/util-hooks";
 
 export function Demo1Simple() {
     const [show, setShow] = useState(false);
@@ -15,29 +16,14 @@ export function Demo1Simple() {
     function fn() {
         const date = new Date();
 
-        const msg = date.toLocaleTimeString('en-US', {
-        });
+        const msg = date.toLocaleTimeString('en-US', {});
 
         setState(`called at ${msg}`);
     }
 
     const timeout = 1000;
 
-    const [isReady, cancel, reset] = useTimeoutFn(fn, timeout);
-    const cancelButtonClick = useCallback(() => {
-        if (isReady() === false) {
-            cancel();
-            setState(`cancelled`);
-        } else {
-            reset();
-            setState('Not called yet');
-        }
-    }, []);
-
-    const readyState = isReady();
-
-
-
+    const [set, clear] = useTimeoutImperative(fn);
 
     return (
         <div className="my-4 text-sm">
@@ -61,19 +47,19 @@ export function Demo1Simple() {
 
             <div className="py-4 w-2/3 max-w-64 text-xs inline-grid grid-rows-[auto_auto_auto_1fr] items-center gap-1">
                 <div>
-                    Promise: {readyState !== null ? `Function will be called in ${timeout/1000} second(s)` : 'Timer cancelled'}
+                    {/* Promise: {readyState !== null ? `Function will be called in ${timeout / 1000} second(s)` : 'Timer cancelled'} */}
                 </div>
 
                 <div>
-                    Function state: {readyState === false ? 'Pending' : readyState ? 'Called' : 'Cancelled'}
+                    {/* Function state: {readyState === false ? 'Pending' : readyState ? 'Called' : 'Cancelled'} */}
                 </div>
 
                 <div>
                     State: {state}
                 </div>
 
-                <Button onClick={cancelButtonClick}>
-                    {readyState === false ? 'Cancel' : 'Restart'}{' '}
+                <Button onClick={() => set(timeout)}>
+                    Start{' '}
                     timeout
                 </Button>
             </div>
