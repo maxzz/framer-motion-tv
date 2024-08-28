@@ -19,8 +19,8 @@ export function Header() {
                 </SelectTrigger>
 
                 <SelectContent>
-                    <SelectItem value="demo1">Simple</SelectItem>
-                    <SelectItem value="demo2">Accordion</SelectItem>
+                    <SelectItem value="simple">Simple</SelectItem>
+                    <SelectItem value="accordion">Accordion</SelectItem>
                 </SelectContent>
 
             </Select>
