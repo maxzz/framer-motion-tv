@@ -29,9 +29,19 @@ export function Demo1Simple() {
                     {show ? "Hide" : "Show"}
                 </button>
 
-                <div className="text-xs">
-                    {showMsg && (isDone ? 'exit animation done' : 'element visible')}
-                </div>
+                <AnimatePresence>
+                    {showMsg && (
+                        <motion.div
+                            className="text-xs"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: .8 }}
+                        >
+                            {isDone ? 'exit animation done' : 'element visible'}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
             <div className="grid place-items-center">
@@ -60,7 +70,7 @@ export function Demo1Simple() {
                                 duration: 2,
                             }}
                         >
-                            <div className="my-4 size-12 bg-red-500 rounded-md border-input border-4">
+                            <div className="my-4 size-24 bg-sky-500 rounded-md border-input border-4">
                             </div>
                         </motion.div>
                     )}
