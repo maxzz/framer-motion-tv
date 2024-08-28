@@ -30,10 +30,10 @@ export function useTimeoutImperative(callback: () => void) {
         () => {
             if (idRef.current) {
                 clearTimeout(idRef.current);
-                idRef.current = null
+                idRef.current = null;
             }
         }, []
     );
 
-    return [set, clear] as const;
+    return { set, clear };
 }
