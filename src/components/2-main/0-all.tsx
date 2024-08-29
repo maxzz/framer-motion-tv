@@ -4,13 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Demo1Simple } from "./1-demos/1-simple";
 import { Demo2Accordion } from "./1-demos/2-accordion";
 
-function MotionWrapper({ children }: { children: React.ReactNode; }) {
+function MotionWrapper({ children, ...rest }: { children: React.ReactNode; key: string }) {
     return (
         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 5 }}
+            {...rest}
         >
             {children}
         </motion.div>
@@ -40,15 +41,15 @@ function AllDemos() {
 export function Main() {
     return (
         <main className="p-4">
-            <AnimatePresence initial={false}>
-                <motion.div
+            <AnimatePresence initial={false} mode="wait">
+                {/* <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 5 }}
-                >
+                > */}
                     <AllDemos />
-                </motion.div>
+                {/* </motion.div> */}
             </AnimatePresence>
         </main>
     );
