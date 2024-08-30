@@ -10,7 +10,7 @@ const transitionA: AnimationProps = {
     animate: { opacity: 1, scale: 1 },
     exit: { opacity: 0, scale: 0, transformOrigin: "top left", transition: { duration: 0.5 } },
     transition: { duration: 2 },
-}
+};
 
 function MotionWrapper({ children, ...rest }: { children: React.ReactNode; key: string; }) {
     return (
@@ -30,20 +30,21 @@ export function Layout2() {
         <main className="p-4">
             <TestDescendant />
 
-            <AnimatePresence initial={false} mode="sync">
+            <AnimatePresence initial={false} mode="popLayout">
+                <div>
+                    {demo === "simple" && (
+                        <MotionWrapper key={"simple"}>
+                            <Demo1Simple />
+                        </MotionWrapper>
+                    )}
 
-                {demo === "simple" && (
-                    <MotionWrapper key={"simple"}>
-                        <Demo1Simple />
-                    </MotionWrapper>
-                )}
+                    {demo === "accordion" && (
+                        <MotionWrapper key={"accordion"}>
+                            <Demo2Accordion />
+                        </MotionWrapper>
+                    )}
+                </div>
 
-                {demo === "accordion" && (
-                    <MotionWrapper key={"accordion"}>
-                        <Demo2Accordion />
-                    </MotionWrapper>
-                )}
-                
             </AnimatePresence>
         </main>
     );
