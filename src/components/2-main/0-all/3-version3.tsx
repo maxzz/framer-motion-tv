@@ -1,17 +1,23 @@
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store";
-import { AnimatePresence, motion } from "framer-motion";
-import { Demo1Simple } from "./1-demos/1-simple";
-import { Demo2Accordion } from "./1-demos/2-accordion";
+import { AnimatePresence, AnimationProps, motion } from "framer-motion";
+import { Demo1Simple } from "../1-demos/1-simple";
+import { Demo2Accordion } from "../1-demos/2-accordion";
+import { TestDescendant } from "./7-test-descendant";
+
+const transitionA: AnimationProps = {
+    initial: { opacity: 0, scale: 0, transformOrigin: "top right" },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0, transformOrigin: "top left", transition: { duration: 0.5 } },
+    transition: { duration: 2 },
+}
 
 function MotionWrapper({ children, ...rest }: { children: React.ReactNode; key: string; }) {
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 5 }}
+            {...transitionA}
             {...rest}
+        // className="origin-top-right"
         >
             {children}
         </motion.div>
@@ -38,33 +44,21 @@ function AllDemos() {
     }
 }
 
-export function Main() {
+export function Layout3() {
     const demo = useSnapshot(appSettings).demo;
     return (
         <main className="p-4">
-            <AnimatePresence initial={false}>
+            <TestDescendant />
+
+            <AnimatePresence initial={false} mode="wait">
                 {/* <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 5 }}
                 > */}
-                {/* <AllDemos /> */}
+                <AllDemos />
                 {/* </motion.div> */}
-
-
-                {demo === "simple" && (
-                    <MotionWrapper key={"simple"}>
-                        <Demo1Simple />
-                    </MotionWrapper>
-                )}
-
-                {demo === "accordion" && (
-                    <MotionWrapper key={"accordion"}>
-                        <Demo2Accordion />
-                    </MotionWrapper>
-                )}
-
             </AnimatePresence>
         </main>
     );
